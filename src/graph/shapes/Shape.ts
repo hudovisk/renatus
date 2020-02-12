@@ -1,4 +1,5 @@
 import { ShapeConfig } from "konva/types/Shape";
+import { KonvaEventObject } from "konva/types/Node";
 
 interface ShapeProps {
   center: {
@@ -8,7 +9,7 @@ interface ShapeProps {
   style: Partial<ShapeConfig>;
   width: number;
   height: number;
-  onClick: () => void;
+  onClick: (e: KonvaEventObject<MouseEvent>) => void;
 }
 
 export default ShapeProps;

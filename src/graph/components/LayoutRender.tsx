@@ -1,28 +1,19 @@
 import React from "react";
 import { Stage, Layer } from "react-konva";
-import Layout, { GraphLayoutNode } from "../graph-layout";
+import { KonvaEventObject } from "konva/types/Node";
+import Layout from "../graph-layout";
 import { Node as GraphNode } from "../graph";
 import Node from "./Node";
 import Edge from "./Edge";
 
 const LayoutRender = ({ layout, selectedNode, onNodeSelect }: Props) => {
-  // const onNodeClicked = (node: GraphNode) => () => {
-  //   const NEW_NODE: GraphNode = {
-  //     name: "new_node",
-  //     meta: {
-  //       type: "send_event"
-  //     }
-  //   };
-
-  //   onAddNode(NEW_NODE, {
-  //     from: node.name,
-  //     to: NEW_NODE.name,
-  //     label: "continue"
-  //   });
-  // };
+  const selectNode = (node: GraphNode) => (e: KonvaEventObject<MouseEvent>) => {
+    e.cancelBubble = true;
+    onNodeSelect(node)
+  };
 
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight}>
+    <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => onNodeSelect(null)}>
       <Layer>
         {layout.edges.map(edge => (
           <Edge key={edge.from + "-" + edge.to} edge={edge} />
@@ -33,7 +24,7 @@ const LayoutRender = ({ layout, selectedNode, onNodeSelect }: Props) => {
             key={node.name} 
             node={node} 
             selected={node.name === selectedNode?.name} 
-            onClick={() => onNodeSelect(node)} 
+            onClick={selectNode(node)}
           />
         ))}
       </Layer>
@@ -43,8 +34,8 @@ const LayoutRender = ({ layout, selectedNode, onNodeSelect }: Props) => {
 
 interface Props {
   layout: Layout;
-  selectedNode: GraphLayoutNode;
-  onNodeSelect: (node: GraphNode) => void;
+  selectedNode: GraphNode | null;
+  onNodeSelect: (node: GraphNode | null) => void;
 }
 
 export default LayoutRender;

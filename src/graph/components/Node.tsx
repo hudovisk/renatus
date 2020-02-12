@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import StartNodeShape from "../shapes/StartNodeShape";
 import GenericNodeShape from "../shapes/GenericNodeShape";
 import ConditionalBranchShape from "../shapes/ConditionalBranchShape";
@@ -6,6 +6,7 @@ import ExitNodeShape from "../shapes/ExitNodeShape";
 import { Node as GraphNode } from "../graph";
 import { GraphLayoutNode } from "../graph-layout";
 import ShapeProps from "../shapes/Shape";
+import { KonvaEventObject } from "konva/types/Node";
 
 const getNodeShape = (node: GraphNode): React.ComponentType<ShapeProps> => {
   switch (node.meta.type) {
@@ -23,7 +24,7 @@ const getNodeShape = (node: GraphNode): React.ComponentType<ShapeProps> => {
 interface Props {
   node: GraphLayoutNode;
   selected: boolean;
-  onClick: () => void;
+  onClick: (e: KonvaEventObject<MouseEvent>) => void;
 }
 
 const Node = ({ node, selected, onClick }: Props) => {

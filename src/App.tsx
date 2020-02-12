@@ -5,10 +5,11 @@ import workflow from "./workflow/workflow.json";
 import "./App.css";
 import useGraph from "./graph/useGraph";
 import graphToLayout from "./graph/graph-to-layout";
+import { Node } from "./graph/graph";
 
 const App = () => {
   const [graph, addNode, removeNode] = useGraph(workflow);
-  const [selectedNode, setSelectedNode] = React.useState();
+  const [selectedNode, setSelectedNode] = React.useState<Node | null>(null);
   const layout = graphToLayout(graph);
 
   console.log("selectedNode", selectedNode);
