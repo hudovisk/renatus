@@ -8,11 +8,14 @@ import graphToLayout from "./graph/graph-to-layout";
 
 const App = () => {
   const [graph, addNode, removeNode] = useGraph(workflow);
+  const [selectedNode, setSelectedNode] = React.useState();
   const layout = graphToLayout(graph);
+
+  console.log("selectedNode", selectedNode);
 
   return (
     <div className="App">
-      <LayoutRender layout={layout} onAddNode={addNode} />
+      <LayoutRender layout={layout} selectedNode={selectedNode} onNodeSelect={setSelectedNode} />
     </div>
   );
 };

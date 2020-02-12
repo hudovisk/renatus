@@ -1,8 +1,14 @@
+import { ShapeConfig } from "konva/types/Shape";
+
 interface ShapeProps {
-  x: number;
-  y: number;
+  center: {
+    x: number;
+    y: number;
+  };
+  style: Partial<ShapeConfig>;
   width: number;
   height: number;
+  onClick: () => void;
 }
 
 export default ShapeProps;

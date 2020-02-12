@@ -5,14 +5,7 @@ import ConditionalBranchShape from "../shapes/ConditionalBranchShape";
 import ExitNodeShape from "../shapes/ExitNodeShape";
 import { Node as GraphNode } from "../graph";
 import { GraphLayoutNode } from "../graph-layout";
-
-interface ShapeProps {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  onContextMenu: () => void;
-}
+import ShapeProps from "../shapes/Shape";
 
 const getNodeShape = (node: GraphNode): React.ComponentType<ShapeProps> => {
   switch (node.meta.type) {
@@ -29,22 +22,24 @@ const getNodeShape = (node: GraphNode): React.ComponentType<ShapeProps> => {
 
 interface Props {
   node: GraphLayoutNode;
-  onContextMenu: (node: GraphNode) => void;
+  selected: boolean;
+  onClick: () => void;
 }
 
-const Node = ({ node, onContextMenu }: Props) => {
+const Node = ({ node, selected, onClick }: Props) => {
   console.log(node);
-  const x =  node.center.x; // Math.round(node.center.x - node.width / 2);
-  const y = node.center.y; //Math.round(node.center.y - node.height / 2);
 
   const Shape = getNodeShape(node);
   return (
     <Shape
-      x={x}
-      y={y}
+      center={node.center}
       width={node.width}
       height={node.height}
-      onContextMenu={() => onContextMenu(node)}
+      onClick={onClick}
+      style={{
+        fill: selected ? "blue" : "red",
+        shadowBlur: 10
+      }}
     />
   );
 };
