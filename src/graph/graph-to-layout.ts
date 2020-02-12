@@ -12,7 +12,8 @@ interface Size {
 }
 
 const NODE_SIZES: Record<string, Size> = {
-  start: { width: 75, height: 50 }
+  start: { width: 50, height: 50 },
+  final: { width: 50, height: 50 }
 };
 
 const DEFAULT_NODE_SIZE: Size = {

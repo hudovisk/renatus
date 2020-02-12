@@ -24,12 +24,12 @@ const LayoutRender = ({ layout, onAddNode }: Props) => {
   return (
     <Stage width={window.innerWidth} height={window.innerHeight}>
       <Layer>
-        {layout.nodes.map(node => (
-          <Node key={node.name} node={node} onContextMenu={e => alert(e)} />
-        ))}
-
         {layout.edges.map(edge => (
           <Edge key={edge.from + "-" + edge.to} edge={edge} />
+        ))}
+
+        {layout.nodes.map(node => (
+          <Node key={node.name} node={node} onContextMenu={e => alert(e)} />
         ))}
       </Layer>
     </Stage>
